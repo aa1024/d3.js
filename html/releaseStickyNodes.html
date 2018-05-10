@@ -19,7 +19,8 @@ d3.json("../data/miserables.json", function(error, graph) {
 
   simulation
       .nodes(graph.nodes)
-      .on("tick", ticked);
+      .on("tick", ticked)
+            .on("dblclick", dblclick);
 
 
   simulation.force("link")
@@ -40,7 +41,11 @@ d3.json("../data/miserables.json", function(error, graph) {
       d.y = Math.max(margin, Math.min(height - margin, d.y))
     });
   
-
+  function dblclick() {
+   graph.nodes.forEach(function(d) {
+        d.fx = d.fy = null;
+    })
+  };
 
     context.clearRect(0, 0, width, height);
 
